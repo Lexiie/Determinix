@@ -12,12 +12,12 @@ export default function Metrics() {
 
   return (
     <Card>
-      <h2 className="text-2xl font-bold text-white mb-6">Metrics</h2>
-      <div className="grid grid-cols-2 gap-4">
-        <div><div className="text-3xl font-bold text-green-400">{successRate}%</div><div className="text-sm text-slate-400">Success Rate</div></div>
-        <div><div className="text-3xl font-bold text-cyan-400">{averageDelay}</div><div className="text-sm text-slate-400">Avg Delay</div></div>
-        <div><div className="text-3xl font-bold text-yellow-400">{reorderedCount}</div><div className="text-sm text-slate-400">Reordered</div></div>
-        <div><div className="text-3xl font-bold text-purple-400">{reservedSlots}</div><div className="text-sm text-slate-400">Reserved Slots</div></div>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Metrics</h2>
+      <div className="grid grid-cols-2 gap-3 md:gap-4">
+        <div><div className="text-2xl md:text-3xl font-bold text-green-400">{successRate}%</div><div className="text-xs md:text-sm text-slate-400">Success Rate</div></div>
+        <div><div className="text-2xl md:text-3xl font-bold text-cyan-400">{averageDelay}</div><div className="text-xs md:text-sm text-slate-400">Avg Delay</div></div>
+        <div><div className="text-2xl md:text-3xl font-bold text-yellow-400">{reorderedCount}</div><div className="text-xs md:text-sm text-slate-400">Reordered</div></div>
+        <div><div className="text-2xl md:text-3xl font-bold text-purple-400">{reservedSlots}</div><div className="text-xs md:text-sm text-slate-400">Reserved Slots</div></div>
       </div>
     </Card>
   );

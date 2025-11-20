@@ -10,9 +10,9 @@ export default function Timeline() {
 
   return (
     <Card>
-      <h2 className="text-2xl font-bold text-white mb-6">Timeline</h2>
-      <div className="overflow-x-auto">
-        <svg viewBox="0 0 800 200" className="w-full min-w-[600px]" preserveAspectRatio="xMidYMid meet">
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Timeline</h2>
+      <div className="overflow-x-auto -mx-4 px-4">
+        <svg viewBox="0 0 800 200" className="w-full min-w-[500px] md:min-w-[600px]" preserveAspectRatio="xMidYMid meet">
           {Array.from({ length: SLOT_COUNT }, (_, i) => i + 1).map((slot) => (
             <g key={slot}>
               <rect x={50 + (slot - 1) * 60} y={80} width={50} height={80} fill="none" stroke="#334155" strokeWidth="2" rx="8" />
@@ -27,7 +27,7 @@ export default function Timeline() {
           ))}
         </svg>
       </div>
-      <div className="flex gap-4 mt-4 text-sm">
+      <div className="flex flex-wrap gap-3 md:gap-4 mt-4 text-xs md:text-sm">
         <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-green-500"></div><span className="text-slate-300">Success</span></div>
         <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-cyan-400"></div><span className="text-slate-300">Pending</span></div>
         <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-red-500"></div><span className="text-slate-300">Failed</span></div>
