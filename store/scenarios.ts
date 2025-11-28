@@ -4,42 +4,54 @@ export interface RaikuScenario {
   description: string;
   sequence: string[];
   explanation: string;
+  educationTopic: 'overview' | 'aot' | 'jit' | 'retry' | 'developers';
+  slotReservation?: number;
 }
 
 export const raikuScenarios: RaikuScenario[] = [
   {
-    id: "perp-dex",
-    name: "Perp DEX: Deterministic Order Execution",
-    description: "Guaranteed order execution with no MEV",
+    id: "aot-execution",
+    name: "AOT Reserved Execution",
+    description: "Guaranteed slot reservation for deterministic ordering",
     sequence: ["reserve_aot", "execute", "confirm"],
-    explanation: "AOT reservation ensures deterministic execution order, eliminating MEV opportunities and providing fair execution for perpetual DEX trades."
+    explanation: "AOT = reservasi slot sebelum eksekusi, cocok untuk orderbook DEX, settlement, NFT mint batch. Slot dijamin, tidak ada gas war.",
+    educationTopic: "aot",
+    slotReservation: 5
   },
   {
-    id: "nft-mint-success",
-    name: "NFT Mint (AOT Slot Fairness)",
-    description: "Fair NFT minting with guaranteed slot",
-    sequence: ["reserve_aot", "execute", "confirm"],
-    explanation: "AOT slot reservation guarantees fair ordering for NFT mints, preventing front-running and ensuring first-come-first-served fairness."
-  },
-  {
-    id: "nft-mint-retry",
-    name: "NFT Mint with Retry",
-    description: "NFT mint with Ackermann retry on failure",
-    sequence: ["reserve_aot", "execute", "fail", "retry", "execute", "confirm"],
-    explanation: "When execution fails, Ackermann node retry logic automatically retries the transaction, ensuring eventual consistency and success."
-  },
-  {
-    id: "cross-chain",
-    name: "Cross-chain Timed Settlement",
-    description: "JIT reservation for flexible timing",
+    id: "jit-execution",
+    name: "JIT Execution Window",
+    description: "Flexible timing for latency-sensitive operations",
     sequence: ["reserve_jit", "execute", "confirm"],
-    explanation: "JIT reservation allows flexible execution timing for cross-chain settlements where exact timing coordination is needed."
+    explanation: "JIT = reservasi slot tepat sebelum eksekusi, cocok untuk transaksi latency-sensitive dan cross-chain atomic settlement.",
+    educationTopic: "jit",
+    slotReservation: 8
   },
   {
     id: "ackermann-retry",
-    name: "Ackermann Node Retry Logic",
-    description: "Demonstrating retry mechanism",
+    name: "Failure & Ackermann Retry",
+    description: "Automatic retry without user resubmission",
     sequence: ["reserve_jit", "execute", "fail", "retry", "execute", "confirm"],
-    explanation: "Full demonstration of Ackermann retry logic: JIT reservation, initial failure, automatic retry, and eventual confirmation."
+    explanation: "Retry otomatis oleh Ackermann Node. Tidak butuh resubmit dari user → lebih stabil, bebas spam.",
+    educationTopic: "retry",
+    slotReservation: 6
+  },
+  {
+    id: "nft-mint-fair",
+    name: "Fair NFT Mint",
+    description: "Deterministic ordering eliminates gas wars",
+    sequence: ["reserve_aot", "execute", "confirm"],
+    explanation: "Semua user reservasi slot window, deterministic ordering, tidak ada gas war. First-come-first-served yang benar-benar fair.",
+    educationTopic: "aot",
+    slotReservation: 3
+  },
+  {
+    id: "cross-chain-settlement",
+    name: "Cross-chain Atomic Settlement",
+    description: "Precise timing coordination across chains",
+    sequence: ["reserve_jit", "execute", "confirm"],
+    explanation: "JIT memungkinkan koordinasi timing yang presisi untuk settlement atomic cross-chain.",
+    educationTopic: "jit",
+    slotReservation: 10
   }
 ];
