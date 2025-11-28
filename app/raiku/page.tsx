@@ -24,8 +24,12 @@ export default function RaikuPage() {
   const [selectedScenario, setSelectedScenario] = useState<RaikuScenario | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [events, setEvents] = useState<Event[]>([]);
-  const [slots, setSlots] = useState(
-    Array.from({ length: 12 }, (_, i) => ({ id: i + 1, type: 'empty' as const }))
+  const [slots, setSlots] = useState<Array<{
+    id: number;
+    type: 'empty' | 'aot' | 'jit' | 'executing' | 'confirmed' | 'failed';
+    label?: string;
+  }>>(
+    Array.from({ length: 12 }, (_, i) => ({ id: i + 1, type: 'empty' }))
   );
   const [currentSlot, setCurrentSlot] = useState(0);
 
